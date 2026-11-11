@@ -80,11 +80,11 @@ export const works: Project[] = [
         "Role-based access. The same record has to be editable by an establishment, reviewable by its local government unit and reportable by the province, without anything leaking between them.",
       next: "Offline support for the trip planner, since many destinations have a weak signal.",
     },
-    cover: "/images/projects/laguna-guide/1.png",
+    cover: "/images/projects/laguna-guide/1.webp",
     gallery: [
-      "/images/projects/laguna-guide/2.png",
-      "/images/projects/laguna-guide/3.png",
-      "/images/projects/laguna-guide/4.png",
+      "/images/projects/laguna-guide/2.webp",
+      "/images/projects/laguna-guide/3.webp",
+      "/images/projects/laguna-guide/4.webp",
     ],
   },
   {
@@ -122,11 +122,11 @@ export const works: Project[] = [
       "It is a personal space, not a social network: no public feeds, no followers, and no required social interaction.",
     ],
     liveUrl: "https://life-archive-tan.vercel.app/",
-    cover: "/images/projects/life-archive/2.jpg",
+    cover: "/images/projects/life-archive/2.webp",
     gallery: [
-      "/images/projects/life-archive/1.jpg",
-      "/images/projects/life-archive/3.jpg",
-      "/images/projects/life-archive/4.jpg",
+      "/images/projects/life-archive/1.webp",
+      "/images/projects/life-archive/3.webp",
+      "/images/projects/life-archive/4.webp",
     ],
   },
   {
@@ -165,8 +165,8 @@ export const works: Project[] = [
       "E-Lance is a smartphone marketplace that connects buyers and sellers in real time, with secure login and tools for managing profiles and transactions.",
       "It also offers promotions and analytics for both buyers and sellers.",
     ],
-    cover: "/images/projects/e-lance/1.png",
-    gallery: ["/images/projects/e-lance/2.png", "/images/projects/e-lance/3.png"],
+    cover: "/images/projects/e-lance/1.webp",
+    gallery: ["/images/projects/e-lance/2.webp", "/images/projects/e-lance/3.webp"],
   },
   {
     slug: "scholarly",
@@ -197,9 +197,9 @@ export const works: Project[] = [
     },
     summary:
       "A school management platform supporting academic processes and educational administration.",
-    cover: "/images/projects/scholarly/1.png",
-    // 3-blurred.png is 3.png with other people's names and email addresses blurred.
-    gallery: ["/images/projects/scholarly/2.png", "/images/projects/scholarly/3-blurred.png"],
+    cover: "/images/projects/scholarly/1.webp",
+    // 3-blurred.webp is 3.webp with other people's names and email addresses blurred.
+    gallery: ["/images/projects/scholarly/2.webp", "/images/projects/scholarly/3-blurred.webp"],
   },
 ];
 

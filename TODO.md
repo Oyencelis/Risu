@@ -20,7 +20,7 @@ What is still open. Your data lives in `data/` (see `data/README.md`).
 - [ ] **Vercel Analytics.** After deploying, enable Analytics in the Vercel project dashboard.
 - [ ] **E-Lance stack.** Set to Flask, Supabase, PostgreSQL, Vercel ("same as Laguna Guide",
       without the AI and NLP integrations). Add those if E-Lance uses them.
-- [ ] **Skills list.** Scholarly uses Java and Spring Boot, which are not in `data/skills.ts`.
+- [x] **Skills list.** Scholarly uses Java and Spring Boot, which are not in `data/skills.ts` (added to Back-end).
 - [ ] **Scholarly `3-blurred.png`.** A copy of `3.png` with names and emails blurred.
 - [ ] **Wording** of the biography and project summaries.
 - [ ] **A real phone.** The phone layout has only been checked in a simulated browser.

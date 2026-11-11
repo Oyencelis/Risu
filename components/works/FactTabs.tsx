@@ -1,13 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
+import { TechStack } from "@/components/ui/TechStack";
 
 export type FactTab = {
   label: string;
   items: string[];
-  /** "list" numbers the items; "chips" shows them as pills. */
-  style: "list" | "chips";
+  /** "list" numbers the items; "chips" shows them as pills; "icons" displays interactive tech icons. */
+  style: "list" | "chips" | "icons";
 };
 
 /**
@@ -16,6 +17,7 @@ export type FactTab = {
  */
 export function FactTabs({ tabs }: { tabs: FactTab[] }) {
   const id = useId();
+  const reduce = useReducedMotion();
   const [requested, setActive] = useState(0);
   const active = Math.min(requested, tabs.length - 1);
   const tab = tabs[active];
@@ -64,12 +66,16 @@ export function FactTabs({ tabs }: { tabs: FactTab[] }) {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={tab.label}
-            initial={{ opacity: 0, y: 8 }}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.22 }}
           >
-            {tab.style === "chips" ? (
+            {tab.style === "icons" ? (
+              <div className="pt-3 pb-1">
+                <TechStack items={tab.items} size="lg" label="Project tech stack" />
+              </div>
+            ) : tab.style === "chips" ? (
               <ul className="mono flex flex-wrap gap-1.5">
                 {tab.items.map((item) => (
                   <li key={item} className="chip">

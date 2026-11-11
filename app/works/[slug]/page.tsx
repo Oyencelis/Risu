@@ -27,14 +27,33 @@ export async function generateMetadata(props: PageProps<"/works/[slug]">): Promi
   const project = getProject(slug);
   if (!project) return {};
   const title = `${project.name} — ${project.title}`;
+  const ogImageUrl = `/works/${project.slug}/opengraph-image`;
   return {
     title,
     description: project.summary,
     alternates: { canonical: `/works/${project.slug}` },
     openGraph: {
+      type: "article",
+      siteName: `${site.brand} — ${site.edition}`,
       title: `${title} | ${site.brand}`,
       description: project.summary,
       url: `/works/${project.slug}`,
+      locale: "en_US",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${project.name} — ${project.kind} by ${site.brand}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${site.brand}`,
+      description: project.summary,
+      creator: `@${site.brand.toLowerCase()}`,
+      images: [ogImageUrl],
     },
   };
 }
@@ -49,10 +68,18 @@ export default async function ProjectPage(props: PageProps<"/works/[slug]">) {
   const next = realProjects[(realProjects.indexOf(project) + 1) % realProjects.length];
 
   const gallery = project.gallery ?? [];
-  // What the browser frame's address bar shows.
-  const address = project.liveUrl
-    ? new URL(project.liveUrl).host
-    : `${project.slug}.preview`;
+  // What the browser frame's address bar shows, safely parsed.
+  let address = `${project.slug}.preview`;
+  if (project.liveUrl) {
+    try {
+      const target = project.liveUrl.startsWith("http")
+        ? project.liveUrl
+        : `https://${project.liveUrl}`;
+      address = new URL(target).host;
+    } catch {
+      address = project.liveUrl;
+    }
+  }
 
   const entries: Entry[] = [
     { id: "project", label: project.name },
@@ -66,11 +93,14 @@ export default async function ProjectPage(props: PageProps<"/works/[slug]">) {
   const tabs: FactTab[] = [
     ...(project.concepts ? [{ label: "Scope", items: project.concepts, style: "list" as const }] : []),
     ...(project.roles ? [{ label: "Built for", items: project.roles, style: "chips" as const }] : []),
-    ...(project.stack ? [{ label: "Stack", items: project.stack, style: "chips" as const }] : []),
+    ...(project.stack ? [{ label: "Stack", items: project.stack, style: "icons" as const }] : []),
   ];
   // The first paragraph is set large; a concept-stage project shows its summary.
-  const [lead, ...rest] =
-    project.comingSoon || !project.description ? [project.summary] : project.description;
+  const descriptions =
+    project.comingSoon || !project.description || project.description.length === 0
+      ? [project.summary]
+      : project.description;
+  const [lead = project.summary, ...rest] = descriptions;
 
   return (
     <HorizontalStory entries={entries}>
@@ -236,7 +266,9 @@ export default async function ProjectPage(props: PageProps<"/works/[slug]">) {
                   ["Challenge", project.story.challenge],
                   ["Next", project.story.next],
                 ] as const
-              ).map(([label, text], i) => (
+              )
+                .filter(([_, text]) => Boolean(text))
+                .map(([label, text], i) => (
                 <li key={label} className="flex">
                   <Reveal
                     delay={i * 80}

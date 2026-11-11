@@ -1,17 +1,18 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { Chrome } from "@/components/layout/Chrome";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { site } from "@/content/site";
 import "./globals.css";
 
-// Display grotesque, used heavy and condensed.
-const display = Bricolage_Grotesque({
+// Display grotesque loaded locally with display: 'swap' to prevent layout shifts (CLS).
+const display = localFont({
+  src: "../assets/fonts/BricolageGrotesque-Bold.ttf",
   variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz", "wdth"],
   display: "swap",
+  weight: "700",
 });
 
 // Italic serif for single emphasised words.
@@ -54,16 +55,40 @@ export const metadata: Metadata = {
   applicationName: `${site.brand} — ${site.edition}`,
   authors: [{ name: site.fullName }],
   creator: site.fullName,
+  publisher: site.fullName,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     siteName: `${site.brand} — ${site.edition}`,
     title: site.seo.title,
     description: site.seo.description,
+    url: siteUrl,
+    locale: "en_US",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${site.brand} — ${site.edition}. ${site.role}.`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.seo.title,
     description: site.seo.description,
+    creator: `@${site.brand.toLowerCase()}`,
+    images: ["/opengraph-image"],
   },
 };
 

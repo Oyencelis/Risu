@@ -7,6 +7,7 @@ import { Accented, Words } from "@/components/ui/Accented";
 import { Tilt } from "@/components/ui/Tilt";
 import { Arrow } from "@/components/ui/Arrow";
 import { Reveal } from "@/components/ui/Reveal";
+import { TechStack } from "@/components/ui/TechStack";
 import { MoreWorks } from "@/components/works/MoreWorks";
 import { ProjectTile } from "@/components/works/ProjectTile";
 import { WorksIndex } from "@/components/works/WorksIndex";
@@ -26,7 +27,29 @@ export const metadata: Metadata = {
   title: "Works",
   description,
   alternates: { canonical: "/works" },
-  openGraph: { title: `Works | ${site.brand}`, description, url: "/works" },
+  openGraph: {
+    type: "website",
+    siteName: `${site.brand} — ${site.edition}`,
+    title: `Works | ${site.brand}`,
+    description,
+    url: "/works",
+    locale: "en_US",
+    images: [
+      {
+        url: "/works/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `Works by ${site.brand}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Works | ${site.brand}`,
+    description,
+    creator: `@${site.brand.toLowerCase()}`,
+    images: ["/works/opengraph-image"],
+  },
 };
 
 // The "More work" panel only exists when there is something to put in it.
@@ -95,11 +118,9 @@ export default function WorksPage() {
                 </p>
                 <p className="body-l mt-5 text-(--mut)">{project.summary}</p>
                 {project.stack ? (
-                  <ul aria-label="Stack" className="mono mt-5 flex flex-wrap gap-x-4 gap-y-1">
-                    {project.stack.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  <div className="mt-5">
+                    <TechStack items={project.stack} label={`${project.name} tech stack`} />
+                  </div>
                 ) : null}
               </Reveal>
               <Link href={`/works/${project.slug}`} className="btn mono self-start">

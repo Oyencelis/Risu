@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { Arrow } from "@/components/ui/Arrow";
 import { BrowserFrame } from "@/components/works/BrowserFrame";

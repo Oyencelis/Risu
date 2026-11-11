@@ -22,7 +22,7 @@ export function Portrait({ className = "" }: { className?: string }) {
         sizes="(min-width: 48rem) 30vw, 100vw"
         // Always loaded straight away: it is on the first panel of About and comes
         // into view on the home page during the opening zoom.
-        loading="eager"
+        priority
         className="object-cover grayscale transition-[filter] duration-700 hover:grayscale-0"
         style={{ objectPosition: portraitFocus }}
       />

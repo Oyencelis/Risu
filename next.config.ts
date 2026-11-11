@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*"],
 
   images: {
+    formats: ["image/avif", "image/webp"],
     // While developing (`npm run dev`), serve images straight from /public so
     // a replaced file shows on the next refresh, even under the same name.
     // The live site still gets resized, optimised images.

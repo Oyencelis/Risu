@@ -8,6 +8,7 @@ import { Accented, Words } from "@/components/ui/Accented";
 import { Arrow } from "@/components/ui/Arrow";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
+import { TechIcon } from "@/components/ui/TechIcon";
 import { frameNo, site, type Entry } from "@/content/site";
 
 const description = `${site.fullName} (${site.brand}) — ${site.role} based in ${site.location}. Profile, areas of practice, skills, experience, and education.`;
@@ -16,7 +17,29 @@ export const metadata: Metadata = {
   title: "About",
   description,
   alternates: { canonical: "/about" },
-  openGraph: { title: `About | ${site.brand}`, description, url: "/about" },
+  openGraph: {
+    type: "profile",
+    siteName: `${site.brand} — ${site.edition}`,
+    title: `About | ${site.brand}`,
+    description,
+    url: "/about",
+    locale: "en_US",
+    images: [
+      {
+        url: "/about/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `About ${site.fullName} (${site.brand})`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `About | ${site.brand}`,
+    description,
+    creator: `@${site.brand.toLowerCase()}`,
+    images: ["/about/opengraph-image"],
+  },
 };
 
 const entries: Entry[] = [
@@ -161,7 +184,8 @@ export default function AboutPage() {
                 <ul className="mono flex flex-wrap gap-1.5">
                   {group.items.map((item) => (
                     <li key={item} className="chip">
-                      {item}
+                      <TechIcon name={item} className="size-3.5 shrink-0 text-current opacity-80" />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>

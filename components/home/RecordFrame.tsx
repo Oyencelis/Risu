@@ -31,15 +31,15 @@ export function RecordFrame({ label, theme = "dark" }: RecordFrameProps) {
           </Reveal>
         </div>
 
-        {/* Toolkit, running edge to edge. */}
-        <div className="display -mx-5 flex flex-col gap-2 text-[calc(4.4*var(--scale))] wide:-mx-[calc(3.6*var(--scale))] wide:text-[calc(7*var(--scale))]">
-          <Marquee items={skills.slice(0, half)} label="Skills and tools" outline duration={46} />
+        {/* Toolkit, running edge to edge as tech icons. */}
+        <div className="-mx-5 flex flex-col gap-2 py-2 wide:-mx-[calc(3.6*var(--scale))] wide:gap-[calc(1.4*var(--scale))]">
+          <Marquee items={skills.slice(0, half)} label="Skills and tools" icons duration={42} />
           <Marquee
             items={skills.slice(half)}
             label="More skills and tools"
-            outline
+            icons
             reverse
-            duration={52}
+            duration={48}
           />
         </div>
 

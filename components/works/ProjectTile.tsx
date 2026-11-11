@@ -43,7 +43,8 @@ export function ProjectTile({
           alt={`Screenshot of ${project.name}`}
           fill
           sizes={sizes}
-          loading={eager ? "eager" : "lazy"}
+          priority={eager}
+          loading={eager ? undefined : "lazy"}
           className="object-cover object-left-top"
         />
       </div>

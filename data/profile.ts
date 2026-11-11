@@ -18,7 +18,7 @@ export const profile = {
    * Portrait photo. Put the file under public/images/ and give its path.
    * Set to null to hide the portrait.
    */
-  portrait: "/images/misc/risu.jpg" as string | null,
+  portrait: "/images/misc/risu.webp" as string | null,
   /** Which part of the photo stays in view when it is cropped (x y). */
   portraitFocus: "58% 45%",
 
